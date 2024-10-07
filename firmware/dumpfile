@@ -1,0 +1,122 @@
+
+firmware.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .memory:
+
+00000000 <start>:
+   0:	40000113          	li	sp,1024
+   4:	0d8000ef          	jal	ra,dc <main>
+   8:	00100073          	ebreak
+
+0000000c <uart_send_char>:
+   c:	500007b7          	lui	a5,0x50000
+  10:	0047a783          	lw	a5,4(a5) # 50000004 <MEM_SIZE+0x4ffffc04>
+  14:	0057d793          	srli	a5,a5,0x5
+  18:	0017f793          	andi	a5,a5,1
+  1c:	fe0788e3          	beqz	a5,c <uart_send_char>
+  20:	500007b7          	lui	a5,0x50000
+  24:	00a7a023          	sw	a0,0(a5) # 50000000 <MEM_SIZE+0x4ffffc00>
+  28:	0087a703          	lw	a4,8(a5)
+  2c:	20076713          	ori	a4,a4,512
+  30:	00e7a423          	sw	a4,8(a5)
+  34:	00008067          	ret
+
+00000038 <uart_send_str>:
+  38:	ff010113          	addi	sp,sp,-16
+  3c:	00112623          	sw	ra,12(sp)
+  40:	00812423          	sw	s0,8(sp)
+  44:	00912223          	sw	s1,4(sp)
+  48:	00050493          	mv	s1,a0
+  4c:	00000413          	li	s0,0
+  50:	0100006f          	j	60 <uart_send_str+0x28>
+  54:	fb9ff0ef          	jal	ra,c <uart_send_char>
+  58:	00140413          	addi	s0,s0,1
+  5c:	0ff47413          	zext.b	s0,s0
+  60:	008487b3          	add	a5,s1,s0
+  64:	0007c503          	lbu	a0,0(a5)
+  68:	fe0516e3          	bnez	a0,54 <uart_send_str+0x1c>
+  6c:	00c12083          	lw	ra,12(sp)
+  70:	00812403          	lw	s0,8(sp)
+  74:	00412483          	lw	s1,4(sp)
+  78:	01010113          	addi	sp,sp,16
+  7c:	00008067          	ret
+
+00000080 <delay_long>:
+  80:	00000713          	li	a4,0
+  84:	00000793          	li	a5,0
+  88:	0140006f          	j	9c <delay_long+0x1c>
+  8c:	00170693          	addi	a3,a4,1
+  90:	00e6b633          	sltu	a2,a3,a4
+  94:	00068713          	mv	a4,a3
+  98:	00f607b3          	add	a5,a2,a5
+  9c:	00079a63          	bnez	a5,b0 <delay_long+0x30>
+  a0:	fe0796e3          	bnez	a5,8c <delay_long+0xc>
+  a4:	000f46b7          	lui	a3,0xf4
+  a8:	23f68693          	addi	a3,a3,575 # f423f <MEM_SIZE+0xf3e3f>
+  ac:	fee6f0e3          	bgeu	a3,a4,8c <delay_long+0xc>
+  b0:	00008067          	ret
+
+000000b4 <delay_short>:
+  b4:	00000793          	li	a5,0
+  b8:	00000693          	li	a3,0
+  bc:	00d7e733          	or	a4,a5,a3
+  c0:	00070463          	beqz	a4,c8 <delay_short+0x14>
+  c4:	00008067          	ret
+  c8:	00178713          	addi	a4,a5,1
+  cc:	00f73633          	sltu	a2,a4,a5
+  d0:	00070793          	mv	a5,a4
+  d4:	00d606b3          	add	a3,a2,a3
+  d8:	fe5ff06f          	j	bc <delay_short+0x8>
+
+000000dc <main>:
+  dc:	ff010113          	addi	sp,sp,-16
+  e0:	00112623          	sw	ra,12(sp)
+  e4:	00812423          	sw	s0,8(sp)
+  e8:	11c00513          	li	a0,284
+  ec:	f4dff0ef          	jal	ra,38 <uart_send_str>
+  f0:	400007b7          	lui	a5,0x40000
+  f4:	05500713          	li	a4,85
+  f8:	00e7a023          	sw	a4,0(a5) # 40000000 <MEM_SIZE+0x3ffffc00>
+  fc:	40000437          	lui	s0,0x40000
+ 100:	05500793          	li	a5,85
+ 104:	00f42023          	sw	a5,0(s0) # 40000000 <MEM_SIZE+0x3ffffc00>
+ 108:	fadff0ef          	jal	ra,b4 <delay_short>
+ 10c:	0aa00793          	li	a5,170
+ 110:	00f42023          	sw	a5,0(s0)
+ 114:	fa1ff0ef          	jal	ra,b4 <delay_short>
+ 118:	fe5ff06f          	j	fc <main+0x20>
+ 11c:	6958                	flw	fa4,20(a0)
+ 11e:	206e                	fld	ft0,216(sp)
+ 120:	6f616863          	bltu	sp,s6,810 <MEM_SIZE+0x410>
+ 124:	5020                	lw	s0,96(s0)
+ 126:	4954                	lw	a3,20(a0)
+ 128:	2154                	fld	fa3,128(a0)
+ 12a:	4700                	lw	s0,8(a4)
+ 12c:	203a4343          	fmadd.s	ft6,fs4,ft3,ft4,rmm
+ 130:	6728                	flw	fa0,72(a4)
+ 132:	6531                	lui	a0,0xc
+ 134:	3961                	jal	fffffdcc <MEM_SIZE+0xfffff9cc>
+ 136:	33653837          	lui	a6,0x33653
+ 13a:	3630                	fld	fa2,104(a2)
+ 13c:	2936                	fld	fs2,328(sp)
+ 13e:	3120                	fld	fs0,96(a0)
+ 140:	2e32                	fld	ft8,264(sp)
+ 142:	2e31                	jal	45e <MEM_SIZE+0x5e>
+ 144:	0030                	addi	a2,sp,8
+ 146:	1b41                	addi	s6,s6,-16
+ 148:	0000                	unimp
+ 14a:	7200                	flw	fs0,32(a2)
+ 14c:	7369                	lui	t1,0xffffa
+ 14e:	01007663          	bgeu	zero,a6,15a <main+0x7e>
+ 152:	0011                	c.nop	4
+ 154:	0000                	unimp
+ 156:	1004                	addi	s1,sp,32
+ 158:	7205                	lui	tp,0xfffe1
+ 15a:	3376                	fld	ft6,376(sp)
+ 15c:	6932                	flw	fs2,12(sp)
+ 15e:	7032                	flw	ft0,44(sp)
+ 160:	0030                	addi	a2,sp,8
+
+00000162 <end>:
+	...
