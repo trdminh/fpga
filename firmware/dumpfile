@@ -73,50 +73,48 @@ Disassembly of section .memory:
   dc:	ff010113          	addi	sp,sp,-16
   e0:	00112623          	sw	ra,12(sp)
   e4:	00812423          	sw	s0,8(sp)
-  e8:	11c00513          	li	a0,284
+  e8:	11400513          	li	a0,276
   ec:	f4dff0ef          	jal	ra,38 <uart_send_str>
   f0:	400007b7          	lui	a5,0x40000
-  f4:	05500713          	li	a4,85
-  f8:	00e7a023          	sw	a4,0(a5) # 40000000 <MEM_SIZE+0x3ffffc00>
-  fc:	40000437          	lui	s0,0x40000
- 100:	05500793          	li	a5,85
- 104:	00f42023          	sw	a5,0(s0) # 40000000 <MEM_SIZE+0x3ffffc00>
- 108:	fadff0ef          	jal	ra,b4 <delay_short>
- 10c:	0aa00793          	li	a5,170
- 110:	00f42023          	sw	a5,0(s0)
- 114:	fa1ff0ef          	jal	ra,b4 <delay_short>
- 118:	fe5ff06f          	j	fc <main+0x20>
- 11c:	6958                	flw	fa4,20(a0)
- 11e:	206e                	fld	ft0,216(sp)
- 120:	6f616863          	bltu	sp,s6,810 <MEM_SIZE+0x410>
- 124:	5020                	lw	s0,96(s0)
- 126:	4954                	lw	a3,20(a0)
- 128:	2154                	fld	fa3,128(a0)
- 12a:	4700                	lw	s0,8(a4)
- 12c:	203a4343          	fmadd.s	ft6,fs4,ft3,ft4,rmm
- 130:	6728                	flw	fa0,72(a4)
- 132:	6531                	lui	a0,0xc
- 134:	3961                	jal	fffffdcc <MEM_SIZE+0xfffff9cc>
- 136:	33653837          	lui	a6,0x33653
- 13a:	3630                	fld	fa2,104(a2)
- 13c:	2936                	fld	fs2,328(sp)
- 13e:	3120                	fld	fs0,96(a0)
- 140:	2e32                	fld	ft8,264(sp)
- 142:	2e31                	jal	45e <MEM_SIZE+0x5e>
- 144:	0030                	addi	a2,sp,8
- 146:	1b41                	addi	s6,s6,-16
- 148:	0000                	unimp
- 14a:	7200                	flw	fs0,32(a2)
- 14c:	7369                	lui	t1,0xffffa
- 14e:	01007663          	bgeu	zero,a6,15a <main+0x7e>
- 152:	0011                	c.nop	4
- 154:	0000                	unimp
- 156:	1004                	addi	s1,sp,32
- 158:	7205                	lui	tp,0xfffe1
- 15a:	3376                	fld	ft6,376(sp)
- 15c:	6932                	flw	fs2,12(sp)
- 15e:	7032                	flw	ft0,44(sp)
- 160:	0030                	addi	a2,sp,8
+  f4:	0007a023          	sw	zero,0(a5) # 40000000 <MEM_SIZE+0x3ffffc00>
+  f8:	40000437          	lui	s0,0x40000
+  fc:	0ff00793          	li	a5,255
+ 100:	00f42023          	sw	a5,0(s0) # 40000000 <MEM_SIZE+0x3ffffc00>
+ 104:	fb1ff0ef          	jal	ra,b4 <delay_short>
+ 108:	00042023          	sw	zero,0(s0)
+ 10c:	fa9ff0ef          	jal	ra,b4 <delay_short>
+ 110:	fe9ff06f          	j	f8 <main+0x1c>
+ 114:	6958                	flw	fa4,20(a0)
+ 116:	206e                	fld	ft0,216(sp)
+ 118:	6f616863          	bltu	sp,s6,808 <MEM_SIZE+0x408>
+ 11c:	5020                	lw	s0,96(s0)
+ 11e:	4954                	lw	a3,20(a0)
+ 120:	2154                	fld	fa3,128(a0)
+ 122:	4700                	lw	s0,8(a4)
+ 124:	203a4343          	fmadd.s	ft6,fs4,ft3,ft4,rmm
+ 128:	6728                	flw	fa0,72(a4)
+ 12a:	6531                	lui	a0,0xc
+ 12c:	3961                	jal	fffffdc4 <MEM_SIZE+0xfffff9c4>
+ 12e:	33653837          	lui	a6,0x33653
+ 132:	3630                	fld	fa2,104(a2)
+ 134:	2936                	fld	fs2,328(sp)
+ 136:	3120                	fld	fs0,96(a0)
+ 138:	2e32                	fld	ft8,264(sp)
+ 13a:	2e31                	jal	456 <MEM_SIZE+0x56>
+ 13c:	0030                	addi	a2,sp,8
+ 13e:	1b41                	addi	s6,s6,-16
+ 140:	0000                	unimp
+ 142:	7200                	flw	fs0,32(a2)
+ 144:	7369                	lui	t1,0xffffa
+ 146:	01007663          	bgeu	zero,a6,152 <main+0x76>
+ 14a:	0011                	c.nop	4
+ 14c:	0000                	unimp
+ 14e:	1004                	addi	s1,sp,32
+ 150:	7205                	lui	tp,0xfffe1
+ 152:	3376                	fld	ft6,376(sp)
+ 154:	6932                	flw	fs2,12(sp)
+ 156:	7032                	flw	ft0,44(sp)
+ 158:	0030                	addi	a2,sp,8
 
-00000162 <end>:
+0000015a <end>:
 	...

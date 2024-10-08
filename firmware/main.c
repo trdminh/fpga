@@ -44,13 +44,13 @@ int main()
 
     uart_send_str("Xin chao PTIT!");
 
-    GCSR->GPIO_0 = 0x55;
+    GCSR->GPIO_0 = 0x00;
 
     while (1)
     {
-        GCSR->GPIO_0 = 0x55;
+        GCSR->GPIO_0 = 0xff;
         delay_short();
-        GCSR->GPIO_0 = 0xaa;
+        GCSR->GPIO_0 = 0x00;
         delay_short();
     }
 }
