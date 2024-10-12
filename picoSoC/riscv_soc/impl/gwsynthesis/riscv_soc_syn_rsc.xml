@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top" Lut="44">
+    <SubModule name="clk_pll"/>
+    <SubModule name="D_mem_unit" Lut="4" Bsram="4"/>
+    <SubModule name="processor" Register="134" Alu="158" Lut="689" Bsram="2"/>
+    <SubModule name="gpio_unit" Register="64" Lut="12"/>
+    <SubModule name="uart_unit" Register="1" Lut="1">
+        <SubModule name="uart_regs_interface_u0" Register="21" Lut="36"/>
+        <SubModule name="uart_transmitter_u1" Register="21" Lut="33"/>
+    </SubModule>
+</Module>

@@ -1,0 +1,40 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+mem              0x0000000000000000 0x0000000000000400
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.memory         0x0000000000000000      0x328
+                0x0000000000000000                . = 0x0
+ start*(.text)
+ *(.text)
+ .text          0x0000000000000000        0xc ./start.o
+                0x0000000000000000                start
+ .text          0x000000000000000c      0x2c4 ./main.o
+                0x000000000000000c                main
+                0x000000000000007c                uart_send_char
+                0x00000000000000d8                uart_send_str
+                0x0000000000000144                delay_long
+                0x00000000000001c4                delay_short
+                0x0000000000000238                delay
+ *(*)
+ .data          0x00000000000002d0        0x0 ./start.o
+ .bss           0x00000000000002d0        0x0 ./start.o
+ .data          0x00000000000002d0        0x0 ./main.o
+ .bss           0x00000000000002d0        0x0 ./main.o
+ .rodata        0x00000000000002d0       0x1e ./main.o
+ .comment       0x00000000000002ee       0x1b ./main.o
+                                         0x1c (size before relaxing)
+ .riscv.attributes
+                0x0000000000000309       0x1c ./main.o
+                0x0000000000000325                end = .
+                0x0000000000000328                . = ALIGN (0x4)
+ *fill*         0x0000000000000325        0x3 
+LOAD ./start.o
+LOAD ./main.o
+LOAD /opt/riscv32i/bin/../lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a
+OUTPUT(firmware.elf elf32-littleriscv)
