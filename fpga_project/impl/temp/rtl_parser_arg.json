@@ -1,0 +1,49 @@
+{
+ "Device" : "GW1NR-9C",
+ "Files" : [
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/Memory.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/device_select.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/femtorv32_quark.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/gowin_rpll/gowin_rpll.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/gpio_ip.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/regs_uart.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/top.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/uart_ip.v",
+   "Type" : "verilog"
+  },
+  {
+   "Path" : "E:/FPGA/example/fpga_project/src/uart_tx.v",
+   "Type" : "verilog"
+  }
+ ],
+ "IncludePath" : [
+
+ ],
+ "LoopLimit" : 2000,
+ "ResultFile" : "E:/FPGA/example/fpga_project/impl/temp/rtl_parser.result",
+ "Top" : "",
+ "VerilogStd" : "verilog_2001",
+ "VhdlStd" : "vhdl_93"
+}
