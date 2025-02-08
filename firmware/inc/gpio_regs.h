@@ -1,6 +1,6 @@
 // Created with Corsair v1.0.4
-#ifndef __GREGS_H
-#define __GREGS_H
+#ifndef __REGS_H
+#define __REGS_H
 
 #define __I  volatile const // 'read only' permissions
 #define __O  volatile       // 'write only' permissions

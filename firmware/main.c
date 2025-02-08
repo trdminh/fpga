@@ -3,6 +3,31 @@
 #include <gpio_regs.h>
 #include <uart_regs.h>
 
+void uart_send_char(uint8_t my_char);
+void uart_send_str(uint8_t *my_str);
+void delay_short();
+void delay_long();
+void delay(uint64_t time);
+
+int main()
+{
+
+    uart_send_str("Start\n");
+
+
+    uint8_t mask = 0x00; 
+    while (1)
+    {
+        
+        GCSR->GPIO_0 = ~mask; 
+        uart_send_str("Stand up \n");
+        delay(2);
+        GCSR->GPIO_0 = mask;
+        uart_send_str("Sit down \n");
+        delay(2);
+    }
+}
+
 void uart_send_char(uint8_t my_char)
 {
     while (UCSR->U_STAT_bf.READY == 0)
@@ -28,7 +53,7 @@ void uart_send_str(uint8_t *my_str)
 void delay_long()
 {
 
-    for (uint64_t i = 0; i < 1000000; i++)
+    for (uint64_t i = 0; i < 1000000 / 5; i++)
         ;
 }
 
@@ -39,18 +64,11 @@ void delay_short()
         ;
 }
 
-int main()
+void delay(uint64_t time)
 {
-
-    uart_send_str("Xin chao PTIT!");
-
-    GCSR->GPIO_0 = 0x00;
-
-    while (1)
+    for (uint64_t i = 0; i < time; i++)
     {
-        GCSR->GPIO_0 = 0xff;
-        delay_short();
-        GCSR->GPIO_0 = 0x00;
-        delay_short();
+        delay_long();
     }
+        
 }

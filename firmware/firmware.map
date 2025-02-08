@@ -1,40 +1,42 @@
 
+There are no discarded input sections
+
 Memory Configuration
 
 Name             Origin             Length             Attributes
-mem              0x0000000000000000 0x0000000000000400
-*default*        0x0000000000000000 0xffffffffffffffff
+mem              0x00000000         0x00000400
+*default*        0x00000000         0xffffffff
 
 Linker script and memory map
 
 
-.memory         0x0000000000000000      0x15c
-                0x0000000000000000                . = 0x0
+.memory         0x00000000      0x310
+                0x00000000                        . = 0x0
  start*(.text)
  *(.text)
- .text          0x0000000000000000        0xc ./start.o
-                0x0000000000000000                start
- .text          0x000000000000000c      0x108 ./main.o
-                0x000000000000000c                uart_send_char
-                0x0000000000000038                uart_send_str
-                0x0000000000000080                delay_long
-                0x00000000000000b4                delay_short
-                0x00000000000000dc                main
+ .text          0x00000000        0xc ./start.o
+                0x00000000                start
+ .text          0x0000000c      0x2b8 ./main.o
+                0x0000000c                main
+                0x00000070                uart_send_char
+                0x000000cc                uart_send_str
+                0x00000138                delay_long
+                0x000001b8                delay_short
+                0x0000022c                delay
  *(*)
- .data          0x0000000000000114        0x0 ./start.o
- .bss           0x0000000000000114        0x0 ./start.o
- .data          0x0000000000000114        0x0 ./main.o
- .bss           0x0000000000000114        0x0 ./main.o
- .rodata.str1.4
-                0x0000000000000114        0xf ./main.o
- .comment       0x0000000000000123       0x1b ./main.o
-                                         0x1c (size before relaxing)
+ .data          0x000002c4        0x0 ./start.o
+ .bss           0x000002c4        0x0 ./start.o
+ .data          0x000002c4        0x0 ./main.o
+ .bss           0x000002c4        0x0 ./main.o
+ .rodata        0x000002c4       0x1f ./main.o
+ .comment       0x000002e3        0xf ./main.o
+                                 0x10 (size before relaxing)
  .riscv.attributes
-                0x000000000000013e       0x1c ./main.o
-                0x000000000000015a                end = .
-                0x000000000000015c                . = ALIGN (0x4)
- *fill*         0x000000000000015a        0x2 
+                0x000002f2       0x1c ./main.o
+                0x0000030e                        end = .
+                0x00000310                        . = ALIGN (0x4)
+ *fill*         0x0000030e        0x2 
 LOAD ./start.o
 LOAD ./main.o
-LOAD /opt/riscv32i/bin/../lib/gcc/riscv32-unknown-elf/12.1.0/libgcc.a
+LOAD /opt/riscv32i/bin/../lib/gcc/riscv32-unknown-elf/13.2.0/libgcc.a
 OUTPUT(firmware.elf elf32-littleriscv)

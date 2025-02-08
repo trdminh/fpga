@@ -15,6 +15,7 @@ extern "C" {
 #endif
 
 #define UCSR_BASE_ADDR 0x50000000
+//#define UCSR_BASE_ADDR 0x40004000
 
 // U_DATA - UART Data register
 #define UCSR_U_DATA_ADDR 0x0
